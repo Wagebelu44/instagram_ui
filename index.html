@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Instagram</title>
+    <style>
+        .button{
+            position: relative;
+            left: 31%;
+        }
+
+        .body {
+            background: linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%);
+        }
+
+        #csvpath{
+            color: #fff !important;
+            left: 16% !important;
+            text-align: center;
+            display:table;
+        }
+
+        img{
+            margin: auto;
+            display: block;
+            height: 74px;
+        }
+
+        span{
+            font-size: 15px; color: #fff; position: relative; left: 27%;
+        }
+
+    </style>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script>
+        window.$ = window.jQuery = require('./jquery-3.4.1.min.js');
+    </script>
+</head>
+<body class="body">
+<div class="wrapper">
+    <div>
+        <img src="./logo.png">
+        <button type="button" class="btn btn-success button" style="background: #3315268c !important; border: none !important; left: 32% !important;" onclick="checkout()">
+            LOGIN TO INSTAGRAM
+        </button>
+        <br><br>
+        <div class="a" style="text-align: center;">
+            <h1 id='status'>Welocme</h1>
+        </div>
+        <span style="left: 30% !important;">Please save all your files at:</span>
+        <br>
+        <span id="csvpath"></span>
+        <!-- <br> -->
+        <span>Save all Data in Accounts.csv</span>
+        <br>
+        <span>Save all settings in Settings.csv</span>
+        <br>
+        <span>Save all proxies in Proxies.txt</span>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+</div>
+</body>
+<script>
+    const electron = window.require('electron');
+    const userDataPath = (electron.app || electron.remote.app).getPath('userData')
+    document.getElementById('csvpath').innerHTML = userDataPath;
+
+    function checkout() {
+        $.ajax({
+            url: "http://localhost:9999/checkout",
+            method: "POST",
+            success: function () {
+                console.log("Success!")
+            },
+            error: function () {
+                console.log("error");
+            }
+        });
+    }
+
+</script>
+</html>
